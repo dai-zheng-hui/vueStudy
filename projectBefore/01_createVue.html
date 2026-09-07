@@ -6,17 +6,27 @@
     <title>创建一个Vue实例</title>
 </head>
 <body>
+    <div id="box">
+        {{message}}
+    </div>
+    <div id="box2">
+        {{title}}
+    </div>
     <div id="app">
-        {{ message }}
+        <h1>{{title}}</h1>
+        <p>{{message}}</p>
     </div>
 </body>
 <!-- 引入开发版本包 （包含完整注释和警告） 官网v2.cn.vuejs.org -->
 <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
 <script>
     const app = new Vue({
+        // 指定挂载点
         el: '#app',
+        // 定义数据
         data: {
-            message: 'Hello Vue!'
+            message: 'Hello Vue!',
+            title:"Vue Study"
         }
     })
 </script>
