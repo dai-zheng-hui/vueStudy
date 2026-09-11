@@ -26,14 +26,21 @@
     .payUp {
         margin: 10px 10px;
         float: right;
+        color: #110101;
     }
 </style>
 
     <body>
         <div id="app">
             <div class="box">
-                <button @click="payUp(100)" class="payUp">充值100</button>
-                <h1>小黑售货机</h1>
+                <div class="box2">
+                    <span @click="payShow()" class="payUp">充值</span>
+                    <button v-show="isShow" @click="payUp(10)" class="payUp">充值10</button>
+                    <button v-show="isShow" @click="payUp(50)" class="payUp">充值50</button>
+                    <button v-show="isShow" @click="payUp(100)" class="payUp">充值100</button>
+                </div>
+                <br>
+                <h2>小黑售货机</h2>
                 <br>
                 <button @click="pay(5)">可乐 5rmb/瓶</button>
                 <button @click="pay(7)">橙汁 7rmb/杯</button>
@@ -65,7 +72,8 @@
                 7: '杯',
                 10: '杯'
             },
-            buyList: []
+            buyList: [],
+            isShow: false
         },
         methods: {
             pay(price) {
@@ -115,6 +123,9 @@
                     str += `当前余额${this.money}rmb`
                     alert(str)
                 }
+            },
+            payShow() {
+                this.isShow = !this.isShow
             },
             payUp(money) {
                 this.money += money
