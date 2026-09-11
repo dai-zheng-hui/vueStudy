@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>售货机</title>
+    </head>
+    <style>
+    .box {
+        width: 400px;
+        height: 200px;
+        border: 3px solid #110101;
+        border-radius: 5%;
+    }
+
+    span {
+        color: rgb(0, 255, 85);
+    }
+</style>
+
+    <body>
+        <div id="app">
+            <div class="box">
+                <h1>小黑售货机</h1>
+                <button @click="pay(5)">可乐 5rmb/瓶</button>
+                <button @click="pay(7)">橙汁 7rmb/杯</button>
+                <button @click="pay(10)">咖啡 10rmb/杯</button>
+            </div>
+
+            <h2>当前余额<span  @mouseEnter="getMaxByName()">{{money}}</span>rmb</h2>
+        </div>
+    </body>
+    <!-- 引入开发版本包 （包含完整注释和警告） 官网v2.cn.vuejs.org -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+    <script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            money: 100,
+            priceMap: {
+                5: '可乐',
+                7: '橙汁',
+                10: '咖啡'
+            },
+            countMap: {
+                5: 0,
+                7: 0,
+                10: 0
+            },
+            unitMap: {
+                5: '瓶',
+                7: '杯',
+                10: '杯'
+            },
+            buyList: []
+        },
+        methods: {
+            pay(price) {
+                // 校验余额是否足够
+                if (this.money < price) {
+                    alert('余额不足')
+                    return
+                }
+                // 记录买了什么
+                var buyObj = {
+                    name: '',
+                    counts: 0,
+                    unit: ''
+                }
+                for (var key in this.priceMap) {
+                    if (key == price) {
+                        this.countMap[key]++
+                        buyObj.counts = this.countMap[key]
+                        buyObj.name = this.priceMap[key]
+                        buyObj.unit = this.unitMap[key]
+                    }
+                }
+                // 扣钱
+                this.money = this.money - price
+                this.buyList.push(buyObj)
+                
+                // alert(`购买成功，您购买了${buyObj.counts}${buyObj.unit}${buyObj.name}，当前余额${this.money}rmb`)
+            },
+            getMaxByName() {
+                const map = new Map();
+                if (this.buyList.length > 0) {
+                    this.buyList.forEach(item => {
+                        if (!map.has(item.name) || item.counts > map.get(item.name).counts) {
+                            map.set(item.name, item);
+                        }
+                    })
+                }else {
+                    return []
+                }
+                // 获取最大值
+                let res = [...map.values()];
+                if (res.length > 0) {
+                    let str = "您购买了"
+                        res.forEach(item => {
+                            str += `${item.counts}${item.unit}${item.name}，`
+                        })
+                    str += `当前余额${this.money}rmb`
+                    alert(str)
+                }
+            }
+        }
+    })
+</script>
+
+</html>
