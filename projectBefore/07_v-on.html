@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-on</title>
+</head>
+<body>
+   
+   
+     <div id="app">
+        <button v-on:click="count--">-</button>
+        <span>{{count}}</span>
+        <button v-on:click="count++">+</button>
+
+
+
+
+
+
+
+        <button @click="changeH1">切换显示隐藏</button>
+        <h1 v-show="isShow">显示</h1>
+     </div>
+     <!-- v-on: 直接简写为@ 
+        添加监听 + 提供处理逻辑
+        v-on:事件名="内联语句"
+        v-on:事件名="methods中的函数名"
+     -->
+
+</body>
+<!-- 引入开发版本包 （包含完整注释和警告） 官网v2.cn.vuejs.org -->
+<script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            count:100,
+            isShow:true
+        },
+        methods:{
+            // 切换显示隐藏
+            changeH1(){
+                this.isShow = !this.isShow
+                console.log(this.isShow);
+            }
+        }
+    })
+</script>
+</html>

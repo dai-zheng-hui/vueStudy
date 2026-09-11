@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-show 和 v-if</title>
+</head>
+<body>
+   
+   
+     <div id="app">
+         <!-- v-show 
+            控制元素显示或者隐藏 切换css中的display:none 
+            适用于频繁切换显示隐藏的场景-->
+        <div class="box1">
+            <h2 v-show="isShow">v-show</h2>
+        </div>
+         <!-- v-if
+        控制元素显示或者隐藏 (条件渲染) 根据判断条件 创建或者移除元素
+        适用于不频繁切换的场景-->
+        <div class="box2">
+            <h2 v-if="isShow">v-if</h2>
+        </div>
+     </div>
+
+</body>
+<!-- 引入开发版本包 （包含完整注释和警告） 官网v2.cn.vuejs.org -->
+<script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            isShow: false
+        }
+    })
+</script>
+</html>

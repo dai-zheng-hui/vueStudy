@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-else 和 v-else-if</title>
+</head>
+<body>
+   
+   
+     <div id="app">
+        <p v-if="gender === 'male'">性别：男</p>
+        <p v-else>性别：女</p>
+        <hr></hr>
+        <p v-if="score >= 80">成绩A：奖励手机一部</p>
+        <p v-else-if="score < 80 && score >= 60">成绩B：奖励游戏机一台</p>
+        <p v-else-if="score < 60 && score >= 40">成绩C：奖励mp3一台</p>
+        <p v-else>成绩D：奖励笔记本一本</p>
+     </div>
+
+</body>
+<!-- 引入开发版本包 （包含完整注释和警告） 官网v2.cn.vuejs.org -->
+<script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            gender: 'male',
+            score:100
+        }
+    })
+</script>
+</html>
