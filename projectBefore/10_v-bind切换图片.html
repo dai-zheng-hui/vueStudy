@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-bind</title>
+</head>
+<body>
+    <!-- v-bind 动态设置html标签的属性 src,title-->
+   
+     <div id="app">
+        <button @click="getUp()">上一个</button> 
+        <button @click="getDown()">下一个</button>
+        <!-- 简写为：src -->
+        <img :src="imgArr[index]" style="width: 200px;height: 200px;">
+     </div>
+     
+
+</body>
+<!-- 引入开发版本包 （包含完整注释和警告） 官网v2.cn.vuejs.org -->
+<script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            imgArr:[
+                '../../640.jpg',
+            '../../640 (1).jpg',
+            '../../640 (2).jpg'],
+            index:0
+        },
+        methods:{
+            getUp(){
+                this.index++
+                if (this.index > this.imgArr.length-1) {
+                    this.index = 0
+                }
+                
+            },
+            getDown(){
+                this.index--
+                if (this.index < 0) {
+                    this.index = this.imgArr.length-1
+                }
+            }
+        }
+    })
+</script>
+</html>
