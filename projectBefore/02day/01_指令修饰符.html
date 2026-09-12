@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>指令修饰符</title>
+    </head>
+    <body>
+        <div id="app">
+            <h3>@keyup.enter 监听键盘回车事件</h3>
+            <input type="text" v-model="username" @keyup.enter="fn">
+            <!-- @keyup="fn"  
+                if(e.key == "enter"){
+                        console.log("触发：",e , this.username);
+                    }-->
+        </div>
+    </body>
+    <!-- 引入开发版本包 （包含完整注释和警告） 官网v2.cn.vuejs.org -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el:"#app",
+            data:{
+                username:""
+            },
+            methods: {
+                fn(e){
+                    if(e.key == "enter"){
+                        console.log("触发：",e , this.username);
+                    }
+                    console.log("触发：", this.username);
+                }
+            },
+        })
+</script>
+</html>

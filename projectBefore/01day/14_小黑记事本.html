@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>小黑记事本</title>
+    </head>
+    <body>
+        <!-- 指令修饰符：
+         通过"."指明一些指令后缀，不同后缀封装了不同的处理操作，简化代码
+         1.按键修饰符
+         @keyup.enter   监听回车事件
+         2.v-model 修饰符
+         v-model.trim 去除首尾空格
+         v-model.number  转数字
+         3. 事件修饰符
+         @事件名.stop   阻止冒泡
+         @事件名.prevent 阻止默认行为        
+        -->
+        <div id="app">
+            <div class="headers">
+                <h1>小黑记事本</h1>
+                <input @keyup.enter="addTask()" type="text" placeholder="请输入任务" v-model="task">
+                <button @click="addTask(task)">添加任务</button>
+            </div>
+            <div class="main">
+                <ul class="todo-list">
+                    <li class="todo" v-for="(item,index) in todoList"
+                        :key="item.id">
+                        <span>{{index}}.</span>
+                        <label>{{item.task}}</label>
+                        <button class="destory"
+                            @click="delById(item.id)">X</button>
+                    </li>
+                </ul>
+            </div>
+            <div class="footer" v-show="todoList.length > 0">
+                <span class="todo-count">合计：{{ todoList.length}}</span>
+                <button @click="clearTask">清空任务</button>
+            </div>
+        </div>
+    </body>
+    <!-- 引入开发版本包 （包含完整注释和警告） 官网v2.cn.vuejs.org -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el:"#app",
+            data:{
+                todoList :[
+                    {id: 1, task: "跑步锻炼"},
+                    {id: 2, task: "健身锻炼"},
+                    {id: 3, task: "口语锻炼"},
+                    {id: 4, task: "吃饭锻炼"},
+                ],
+                task:'',
+            },
+            methods: {
+                delById(id){
+                    this.todoList = this.todoList.filter(item => item.id != id)
+                },
+                addTask(){
+                    if (this.task.trim() == ""){
+                        alert("请输入任务名称")
+                        return
+                    }
+                    let taskObj ={
+                        id: +new Date(),
+                        task:this.task
+                    }
+                    this.todoList.unshift(taskObj)
+                    this.task = ''
+                },
+                clearTask(){
+                    this.todoList = []
+                }
+            },
+        })
+    </script>
+</html>

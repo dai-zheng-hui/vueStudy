@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>指令修饰符02</title>
+    </head>
+    <style>
+        .father {
+            width: 400px;
+            height: 400px;
+            background-color: pink;
+        }
+        .son {
+            width: 200px;
+            height: 200px;
+            background-color: skyblue;
+        }
+    </style>
+    <body>
+        <div id="app">
+            <h3>v-model 修饰符 .trim .number</h3>
+            姓名：<input type="text" v-model.trim ="username">
+            年龄：<input type="text" v-model="age">
+            <h3>事件名.stop  -> 阻止冒泡</h3>
+            <div class="father" @click="fatherFn">
+                <div class="son" @click.stop="sonFn">儿子</div>
+            </div>
+            <h3>事件名.prevent -> 阻止默认行为</h3>
+            <a @click.prevent href="https:www.baidu.com"> 阻止默认行为</a>
+        </div>
+    </body>
+    <!-- 引入开发版本包 （包含完整注释和警告） 官网v2.cn.vuejs.org -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el:"#app",
+            data:{
+                username:'',
+                age:''
+            },
+            methods: {
+                fatherFn(){
+                    alert("老父亲被点击了")
+                },
+                sonFn(){
+                    alert("儿子被点击了")
+                }
+            },
+        })
+</script>
+</html>

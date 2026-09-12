@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小黑书架</title>
+</head>
+<body>
+    <div id="app">
+        <h1>小黑书架</h1>
+        <div class="box">
+            <ul>
+                <li v-for="(item,index) in booksList">
+                    <p>
+                        《{{item.name}}》 
+                        <span>作者：{{item.author}}</span>
+                        <button @Click="delbook(item.id)">删除</button>
+                    </p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+<!-- 引入开发版本包 （包含完整注释和警告） 官网v2.cn.vuejs.org -->
+<script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: "#app",
+        data:{
+            booksList:[
+                {id:1,name:"红楼梦",author:"曹雪芹"},
+                {id:2,name:"三国演义",author:"罗贯中"},
+                {id:3,name:"水浒传",author:"施耐庵"},
+                {id:4,name:"西游记",author:"吴承恩"}
+            ]
+        },
+        methods: {
+            delbook(id){
+                // 通过id进行删除，操作数组
+                // filter 根据条件，保留满足条件的对应项，得到一个新数组
+                this.booksList = this.booksList.filter(item => item.id != id)
+            }
+        },
+    })
+</script>
+</html>

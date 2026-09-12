@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-for</title>
+</head>
+<body>
+    <!-- v-for 基于数据循环，多次渲染整个元素，数组、对象、数字...
+        语法： v-for="(item,index) in items" 
+        v-for 的属性key
+        key属性="唯一标识"
+        作用：给列表项添加的唯一标识，便于Vue进行列表项的正确排序复用。
+        key的值只能是字符串或者数字，且具有唯一性，一般推荐使用id作为key
+    -->
+    <div id="app">
+        <h1>小黑英语</h1>
+        <ul>
+            <li v-for="(item,index) in items" ::key="item.id">{{index}}、{{item}}</li>
+        </ul>
+    </div>
+</body>
+<!-- 引入开发版本包 （包含完整注释和警告） 官网v2.cn.vuejs.org -->
+<script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            items: ['a', 'b', 'c', 'd', 'e', 'f', 'g']
+        },
+        methods:{
+            
+        }
+    })
+</script>
+</html>
