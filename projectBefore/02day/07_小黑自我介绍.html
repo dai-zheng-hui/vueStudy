@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>小黑的自我介绍</title>
+    </head>
+    <style>
+        
+        
+    </style>
+    <body>
+        <div id="app">
+            <h3>小黑的自我介绍</h3>
+            姓名：<input type="text" placeholder="请输入姓名" v-model="username">
+            <br><br>
+            是否已婚：<input type="checkbox" v-model="ismarried">
+            <br><br>
+            性别：<input name="gender" type="radio" value="1" v-model="gender"> 男 
+            <input name="gender"  type="radio" value="0" v-model="gender">女
+            <br><br>
+            所在城市：
+            <select v-model="city" >
+                <option value="0" >北京</option>
+                <option value="1" >上海</option>
+                <option value="2" >广州</option>
+                <option value="3" >深圳</option>
+            </select>
+            <br><br>
+            自我介绍：<textarea name="" id="" rows="3" v-model="myDesc"></textarea>
+            <br><br>
+            <button @click="regist">立即注册</button>
+        </div>
+    </body>
+    <!-- 引入开发版本包 （包含完整注释和警告） 官网v2.cn.vuejs.org -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el:"#app",
+            data:{
+                username:'',
+                ismarried:false,
+                gender:0,
+                city:0,
+                myDesc:''
+            },
+            methods: {
+                regist(){
+                    console.log(this);
+                }
+            },
+        })
+</script>
+</html>

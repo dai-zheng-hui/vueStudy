@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小黑成绩单</title>
+</head>
+<style>
+    table,tr,th,td {
+        border:1px,solid,black;
+        border-collapse: collapse
+    }
+    .main {
+        width: 100%;
+        height: 100%;
+    }
+    .left {
+        float: left;
+    }
+    .right {
+        float: right;
+    }
+    .first {
+        font-weight: bold;
+        background-color: #a29f9f;
+        height: 40px;
+    }
+    td {
+        width: 150px;
+        height: 40px;
+        text-align: center;
+    }
+    input {
+        margin: 20px 0;
+    }
+    button {
+        background-color: #0618bf;
+        color: white;
+        border-radius: 15%;
+        width: 80px;
+    }
+    .active {
+        color: red;
+    }
+    .nodata {
+        color: #a29f9f;
+    }
+</style>
+<body>
+    <div class="main" id="app">
+        <div class="left">
+            <table>
+                <tr class="first">
+                    <th>编号</th>
+                    <th>科目</th>
+                    <th>成绩</th>
+                    <th>操作</th>
+                </tr>
+                <tbody v-if="scoreList.length > 0">
+                    <tr v-for="(item,i) in scoreList" :key="item.id" >
+                    <td>
+                        <span>{{i + 1}}</span>
+                    </td>
+                    <td>
+                        <span>{{item.subject}}</span>
+                    </td>
+                    <td>
+                        <span :class="{active:item.score < 60}">{{item.score}}</span>
+                    </td>
+                    <td>
+                        <a href="#" @click="delSubject(item.id)">删除</a>
+                    </td>
+                </tr>
+                </tbody>
+                <tbody v-else>
+                    <tr class="nodata">
+                    <td colspan="4" >
+                        暂无数据
+                    </td>
+                </tr>
+                </tbody>
+                
+                <tr>
+                    <td colspan="4">
+                        <span>总分：{{totalScore}}</span>
+                        <span>平均分：{{avgScore}}</span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="right">
+            科目：<input type="text" placeholder="请输入科目" v-model.trim="subject">
+            <br>
+            分数：<input type="text" placeholder="请输入分数" v-model.number="score">
+            <br>
+            <button @click="addSubject()">添加</button>
+        </div>
+    </div>
+</body>
+<!-- 引入开发版本包 （包含完整注释和警告） 官网v2.cn.vuejs.org -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: "#app",
+            data:{
+                scoreList:[
+                    {id:1,subject:"语文",score:20},
+                    {id:2,subject:"英语",score:60},
+                    {id:3,subject:"数学",score:80},
+                ],
+                subject:'',
+                score:'',
+            },
+            computed: {
+                totalScore(){
+                    return this.scoreList.length > 0 ? this.scoreList.reduce((sum,item) => sum + item.score,0) : '';
+                },
+                avgScore(){
+                    return this.totalScore == '' ?  '' :  Math.round((this.totalScore / this.scoreList.length) * 100) / 100
+                }
+            },
+            methods: {
+                delSubject(id){
+                    this.scoreList = this.scoreList.filter(item => item.id != id)
+                },
+                addSubject(){
+                    if (this.subject === ""){
+                        alert("请输入科目/分数")
+                        return
+                    }
+                    if (typeof(this.score) !== "number"){
+                        alert("请输入正确的分数")
+                        return
+                    }
+                    this.scoreList.unshift({
+                        id: + new Date(),
+                        subject:this.subject,
+                        score:this.score
+                    })
+                    this.subject = ''
+                    this.score = ''
+                }
+            },
+        })
+    </script>
+</html>

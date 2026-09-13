@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>进度条</title>
+    </head>
+    <style>
+        .process {
+            width: 800px;
+            height: 40px;
+            border-radius: 20px;
+            border: 1px solid black;
+            background-color: black;
+        }
+        .inner {
+            height: 40px;
+            background-color: blue;
+            border-radius: 20px;
+        }
+        button {
+            margin: 0px 10px;
+        }
+        
+    </style>
+    <body>
+        <div id="app">
+            
+            <div class="process">
+                <div class="inner" :style="{width:widths + '%'}">
+                    <span>{{widths}}%</span>
+                </div>
+            </div>
+            <br><br>
+            <button @click="widths=25">设置25%</button>
+            <button @click="widths=50">设置50%</button>
+            <button @click="widths=75">设置75%</button>
+            <button @click="widths=100">设置100%</button>
+        </div>
+    </body>
+    <!-- 引入开发版本包 （包含完整注释和警告） 官网v2.cn.vuejs.org -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el:"#app",
+            data:{
+                widths:0
+            },
+            methods: {
+                
+            },
+        })
+</script>
+</html>

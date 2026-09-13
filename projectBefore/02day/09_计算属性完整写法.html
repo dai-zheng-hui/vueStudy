@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>计算属性</title>
+    </head>
+    <style>
+    td {
+        width: 100px;
+        height: 40px;
+        text-align: center;
+        line-height: 40px;
+    }
+    .font {
+        font-weight: bold;
+    }
+</style>
+    <body>
+        <div id="app">
+            姓：<input type="text" v-model="firstname">+名<input type="text"
+                v-model="secondname"> = <span>{{fullname}}</span>
+            <br><br><button @click="changename">改名</button>
+        </div>
+    </body>
+    <!-- 引入开发版本包 （包含完整注释和警告） 官网v2.cn.vuejs.org -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el:"#app",
+            data:{
+              firstname:'刘',
+              secondname:'备'
+            },
+            computed:{
+                // fullname(){
+                //     return this.firstname + this.secondname
+                // }
+                // 完整写法 -> 获取 + 设置
+                fullname: {
+                    // 当fullname 计算属性，被获取求值时，执行get（有缓存时，优先执行缓存）
+                    // 会将返回值作为求值的结果
+                    get() {
+                        return this.firstname + this.secondname
+                    },
+                    // 当fullname 计算属性，被修改取值时，执行get的值，传递给set方法的形参
+                    set(value) {
+                        console.log(value);
+                        this.firstname = value.slice(0,1)
+                        this.secondname = value.slice(1)
+                    }
+                }
+            },
+            methods: {
+               changename(){
+                this.fullname = '吕布不不不不不'
+               }
+            },
+        })
+</script>
+</html>

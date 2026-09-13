@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>tab栏的active效果</title>
+    </head>
+    <style>
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: pink;
+        }
+       
+        
+    </style>
+    <body>
+        <div id="app">
+            <!-- :style="{}" 对样式进行控制 
+            对于背景色这种background-color 可以写成 backgroundColor/'background-color' 才会生效
+            -->
+            <div class="box" :style="{backgroundColor:'yellow'}">
+            </div>
+        </div>
+    </body>
+    <!-- 引入开发版本包 （包含完整注释和警告） 官网v2.cn.vuejs.org -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el:"#app",
+            data:{
+                
+            },
+            methods: {
+                
+            },
+        })
+</script>
+</html>
