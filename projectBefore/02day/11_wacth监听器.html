@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>watch监听器</title>
+    </head>
+    <style>
+    .top {
+        display: flex;
+        justify-content: stretch;
+        margin: 0;
+        padding: 0%;
+    }
+    .choice {
+        margin: 17px 4px;
+        height: 30px;
+    }
+</style>
+    <body>
+        <div id="app">
+            <div class="top">
+                <h4>翻译成的语言</h4>
+                <select name="language" class="choice">
+                    <option value="en" selected>英文</option>
+                    <option value="zh">中文</option>
+                </select>
+            </div>
+            <div class="body">
+                <textarea name="text1" cols="30" rows="10" class="translateBody"
+                    placeholder="请输入要翻译的文本" v-model="obj.words"></textarea>
+                <textarea name="text2" cols="30" rows="10" class="translateText"
+                    v-model="obj.words2"></textarea>
+            </div>
+        </div>
+    </body>
+    <!--  引入开发版本包 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+    <!-- 引入axios包 -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            // words: '',
+            obj: {
+                words: '',
+                words2: '',
+            }
+        },
+        watch: {
+            // 监听words变化
+            // words: function(newVal, oldVal) {
+            //     console.log(newVal, oldVal);
+            // }
+            
+            // 监听对象中属性的变化 需要使用字符串拼接
+            'obj.words'(newVal, oldVal) {
+                
+                clearTimeout(this.timeId)
+                // 防抖操作，延迟执行，减少请求发送次数，提升用户体验
+                this.timeId = setTimeout(async () => {
+                    // 发送请求
+                    const res = await axios.get('https://applet-base-api-t.itheima.net/api/translate', {
+                    params: {
+                        words: newVal
+                    }
+                })
+                console.log(this.timeId);
+                // 赋值给words2
+                this.obj.words2 = res.data.data
+                }, 500)
+            }
+        }
+    })
+</script>
+</html>
