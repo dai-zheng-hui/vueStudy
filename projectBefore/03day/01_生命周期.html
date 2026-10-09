@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue的生命周期</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{ title }}</h1>
+        <button @click="decrement">-</button>
+        <span>{{ count }}</span>
+        <button @click="increment">+</button>
+    </div>
+</body>
+<!-- 引入开发版本包 -->
+<script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            count: 100,
+            title: '计数器', // 响应式数据
+        },
+        methods: {
+            increment() {
+                this.count++;
+            },
+            decrement() {
+                this.count--;
+            }
+        },
+        // 生命周期钩子函数
+        beforeCreate() {
+            // 创建之前没有数据和方法
+            console.log('beforeCreate',this.count); // undefined
+        },
+        created() {
+            // 创建之后有数据和方法
+            // 可以发送初始化数据的请求
+            console.log('created',this.count); // 100
+        },
+        beforeMount() {
+            // 在挂载之前，模板还没有渲染到页面上
+            console.log('beforeMount',document.querySelector('h1').innerHTML); // {{ title }}
+        },
+        mounted() {
+            // 在挂载之后，模板已经渲染到页面上
+            console.log('mounted',document.querySelector('h1').innerHTML); // 计数器
+        },
+        // 更新阶段 修改数据 -> 更新视图
+        beforeUpdate() {
+            // 在更新之前，数据已经改变，但是页面还没有更新
+            console.log('beforeUpdate，数据修改了，视图还没更新',document.querySelector('span').innerHTML); // 100
+        },
+        updated() {
+            console.log('updated，数据修改了，视图已经更新',document.querySelector('span').innerHTML); // 101
+        },
+        // 销毁阶段
+        beforeDestroy() {
+            console.log('beforeDestroy，卸载前');
+        },
+        destroyed() {
+            console.log('destroyed，卸载后');
+        }
+    });
+</script>
+</html>

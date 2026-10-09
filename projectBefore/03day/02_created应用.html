@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>created应用</title>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="item in list" :key="item.id">
+                <h3>{{ item.title }}</h3>
+                <img :src="item.img" alt="">
+            </li>
+        </ul>
+    </div>
+</body>
+<!-- 引入开发版本包 -->
+<script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+ <!-- 引入axios包 -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            list: [],
+        },
+        created() {
+            this.initData();
+        },
+        methods: {
+            initData() {
+                // 发送请求获取数据
+                axios.get('https://hmajax.itheima.net/api/news')
+                    .then(res => {
+                        this.list = res.data;
+                        console.log(this.list);
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    })
+            }
+        },
+    })
+</script>
+</html>
