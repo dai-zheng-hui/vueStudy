@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mounted应用</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    .main {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    .search {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        width: 480px;
+        height: 34px;
+        margin-top: 20px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+    }
+    .search input {
+        border:none;
+        font-size: 16px;
+        width: 400px;
+        height: 30px;
+    }
+    .search input:focus {
+        outline: none;
+        border-color: transparent; /* 如果还有 border 残留 */
+        box-shadow: none;          /* 部分浏览器用 box-shadow 模拟边框 */
+    }
+    .search button {
+        width: 80px;
+        height: 34px;
+        border: none;
+        border-radius: 8px;
+        background-color: #e33e31;
+        color: rgb(241, 240, 240);
+        cursor: pointer;
+    }
+    
+</style>
+<body>
+    <div id="app">
+        <div class="main">
+            <img :src="logoUrl" alt="logo">
+            <div class="search">
+                <input type="text" placeholder="请输入内容" v-model="keyWord" id="inp">
+                <button @click="search">搜索一下</button>
+            </div>
+        </div>
+    </div>
+</body>
+<!-- 引入开发版本包 -->
+<script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+ <!-- 引入axios包 -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            logoUrl: 'https://www.itheima.com/images/logo.png',
+            keyWord: '',
+        },
+        mounted() {
+            console.log(document.querySelector('#inp'));
+            document.querySelector('#inp').focus();
+        },
+        methods: {
+            search() {
+                console.log('用户搜索了：' + this.keyWord);
+            }
+        },
+    })
+</script>
+</html>
