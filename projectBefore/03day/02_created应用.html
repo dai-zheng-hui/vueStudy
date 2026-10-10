@@ -28,12 +28,17 @@
     }
     li .right img {
         margin: 0px 20px;
-        width: 300px;
-        height: 200px;
+        width: 294px;
+        height: 195px;
     }
-    li .left h3 {
+    li .left a {
+        display: block;
         height: 30px;
         margin-left: 10px;
+        font-size: 18px;
+        color: #000;
+        font-weight: bold;
+        text-decoration: none;
     }
     .bottom {
         margin-top: 130px;
@@ -50,7 +55,9 @@
         <ul>
             <li v-for="item in list" :key="item.id">
                 <div class="left">
-                    <h3>{{ item.title }}</h3>
+                    <a :href="item.img" target="_blank">
+                        {{ item.title }}
+                    </a>
                     <div class="bottom">
                         <span>{{ item.source }}</span>
                         <span>{{ item.time }}</span>
