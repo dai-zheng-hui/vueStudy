@@ -33,6 +33,7 @@
     }
     li .left h3 {
         height: 30px;
+        margin-left: 10px;
     }
     .bottom {
         margin-top: 130px;
@@ -76,16 +77,12 @@
             this.initData();
         },
         methods: {
-            initData() {
+            async initData() {
                 // 发送请求获取数据
-                axios.get('https://hmajax.itheima.net/api/news')
-                    .then(res => {
-                        this.list = res.data.data;
-                        console.log(this.list);
-                    })
-                    .catch(err => {
-                        console.log(err);
-                    })
+                const res = await axios.get('https://hmajax.itheima.net/api/news');
+                // console.log(res);
+                // 将数据保存到list中
+                this.list = res.data.data;
             }
         },
     })
